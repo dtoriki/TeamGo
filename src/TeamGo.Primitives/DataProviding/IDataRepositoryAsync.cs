@@ -20,20 +20,18 @@ namespace TeamGo.Primitives.DataProviding
         /// Добавляет сущность в структуру данных
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="entity">Сущность для добавления</param>
         /// <returns>Присвоенный уникальный идентификатор</returns>
-        Task<TId> CreateEntityAsync<TEntity, TId>(TEntity entity)
-            where TEntity : class, IDataEntity<TId>;
+        Task<Guid> CreateEntityAsync<TEntity>(TEntity entity)
+            where TEntity : class, IDataEntity;
         /// <summary>
         /// Добавляет сущность в структуру данных
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="entityOptions">Настройки добавляемой сущности</param>
         /// <returns>Присвоенный уникальный идентификатор</returns>
-        Task<TId> CreateEntityAsync<TEntity, TId>(Action<TEntity> entityOptions)
-            where TEntity : class, IDataEntity<TId>, new();
+        Task<Guid> CreateEntityAsync<TEntity>(Action<TEntity> entityOptions)
+            where TEntity : class, IDataEntity, new();
         /// <summary>
         /// Читает сущность из структуры данных
         /// </summary>
@@ -41,40 +39,36 @@ namespace TeamGo.Primitives.DataProviding
         /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <returns>Сущность</returns>
-        Task<TEntity> ReadEntityAsync<TEntity, TId>(TId id)
-            where TEntity : class, IDataEntity<TId>;
+        Task<TEntity> ReadEntityAsync<TEntity>(Guid id)
+            where TEntity : class, IDataEntity;
         /// <summary>
         /// Читает множество сущностей из структуры данных.
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="predicate">Условие выбора сущностей</param>
         /// <returns>Сущности</returns>
-        Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity, TId>(Func<TEntity, bool> predicate)
-            where TEntity : class, IDataEntity<TId>;
+        Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity>(Func<TEntity, bool> predicate)
+            where TEntity : class, IDataEntity;
         /// <summary>
         /// Читает множество сущностей из структуры данных
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <param name="updateAction">Действия обновления</param>
-        Task UpdateEntity<TEntity, TId>(TId id, Action<TEntity> updateAction)
-            where TEntity : class, IDataEntity<TId>;
+        Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
+            where TEntity : class, IDataEntity;
         /// <summary>
         /// Читает множество сущностей из структуры данных
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <param name="newEntity">Сущность на замену</param>
-        Task UpdateEntity<TEntity, TId>(TId id, TEntity newEntity)
-            where TEntity : class, IDataEntity<TId>;
+        Task UpdateEntity<TEntity>(Guid id, TEntity newEntity)
+            where TEntity : class, IDataEntity;
         /// <summary>
         /// Удаляет сущность из структуры данных
         /// </summary>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
-        Task DeleteEntity<TId>(TId id);
+        Task DeleteEntity(Guid id);
     }
 }
