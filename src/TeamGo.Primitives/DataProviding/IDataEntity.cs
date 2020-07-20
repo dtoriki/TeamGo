@@ -4,7 +4,7 @@ namespace TeamGo.Primitives.DataProviding
     /// Представляет сущность данных.
     /// </summary>
     /// <typeparam name="TId">Тип уникального идентификатора</typeparam>
-    public interface ITableEntity<TId> 
+    public interface IDataEntity<TId> 
     {
         public object Id { get; }
     }
