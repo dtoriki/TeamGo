@@ -1,11 +1,12 @@
+using System;
+
 namespace TeamGo.Primitives.DataProviding
 {
     /// <summary>
     /// Представляет сущность данных.
     /// </summary>
-    /// <typeparam name="TId">Тип уникального идентификатора</typeparam>
-    public interface IDataEntity<TId> 
+    public interface IDataEntity
     {
-        public TId Id { get; }
+        public Guid Id { get; }
     }
 }
