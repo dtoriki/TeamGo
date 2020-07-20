@@ -45,7 +45,6 @@ namespace Build
             bool skipDependencies,
             bool verbose,
             // our options here
-            string project,
             string configuration = "Debug"
             )
         {
@@ -67,12 +66,6 @@ namespace Build
 
             var dotnet = TryFindDotNetExePath()
                 ?? throw new FileNotFoundException("'dotnet' command isn't found. Try to set DOTNET_ROOT variable.");
-
-            Target("watch", async () => {
-                var cmd = await Cli.Wrap(dotnet).WithArguments($"watch --project {Path.Combine("src", project)} run -- -c DEBUG")
-                    .ToConsole()
-                    .ExecuteBufferedAsync().Task.ConfigureAwait(false);
-            });
 
             Target("restore-tools", async () => {
                 var cmd = await Cli.Wrap(dotnet).WithArguments($"tool restore --ignore-failed-sources").ToConsole()
@@ -98,58 +91,59 @@ namespace Build
                     .ExecuteBufferedAsync().Task.ConfigureAwait(false);
             });
 
-            Target("coverage", async () => {
-                var resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
-                if (!Directory.Exists(resultsDirectory))
-                    Directory.CreateDirectory(resultsDirectory);
-                var cmd = await Cli.Wrap(dotnet)
-                    .WithArguments($"test " +
-                    "--nologo " +
-                    "--no-restore " +
-                    $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
-                    $"--logger trx;LogFileName=\"{Path.Combine(resultsDirectory, "tests.trx").Replace("\"", "\\\"")}\" " +
-                    $"-c {configuration} " +
-                    "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=json,cobertura"
-                    )
-                    .ToConsole()
-                    .ExecuteBufferedAsync().Task.ConfigureAwait(false);
+            //Target("coverage", async () =>
+            //{
+            //    var resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
+            //    if (!Directory.Exists(resultsDirectory))
+            //        Directory.CreateDirectory(resultsDirectory);
+            //    var cmd = await Cli.Wrap(dotnet)
+            //        .WithArguments($"test " +
+            //        "--nologo " +
+            //        "--no-restore " +
+            //        $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
+            //        $"--logger trx;LogFileName=\"{Path.Combine(resultsDirectory, "tests.trx").Replace("\"", "\\\"")}\" " +
+            //        $"-c {configuration} " +
+            //        "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=json,cobertura"
+            //        )
+            //        .ToConsole()
+            //        .ExecuteBufferedAsync().Task.ConfigureAwait(false);
 
-                MoveAttachmentsToResultsDirectory(resultsDirectory, cmd.StandardOutput);
-                TryRemoveTestsOutputDirectories(resultsDirectory);
+            //    MoveAttachmentsToResultsDirectory(resultsDirectory, cmd.StandardOutput);
+            //    TryRemoveTestsOutputDirectories(resultsDirectory);
 
-                // Removes all files in inner folders, workaround of https://github.com/microsoft/vstest/issues/2334
-                static void TryRemoveTestsOutputDirectories(string resultsDirectory)
-                {
-                    foreach (var directory in Directory.EnumerateDirectories(resultsDirectory))
-                    {
-                        try
-                        {
-                            Directory.Delete(directory, recursive: true);
-                        }
-                        catch { }
-                    }
-                }
+            //    // Removes all files in inner folders, workaround of https://github.com/microsoft/vstest/issues/2334
+            //    static void TryRemoveTestsOutputDirectories(string resultsDirectory)
+            //    {
+            //        foreach (var directory in Directory.EnumerateDirectories(resultsDirectory))
+            //        {
+            //            try
+            //            {
+            //                Directory.Delete(directory, recursive: true);
+            //            }
+            //            catch { }
+            //        }
+            //    }
 
-                // Removes guid from tests output path, workaround of https://github.com/microsoft/vstest/issues/2378
-                static void MoveAttachmentsToResultsDirectory(string resultsDirectory, string output)
-                {
-                    var attachmentsRegex = new Regex($@"Attachments:(?<filepaths>(?<filepath>[\s]+[^\n]+{Regex.Escape(resultsDirectory)}[^\n]+[\n])+)", RegexOptions.Singleline | RegexOptions.CultureInvariant);
-                    var match = attachmentsRegex.Match(output);
-                    if (match.Success)
-                    {
-                        var regexPaths = match.Groups["filepaths"].Value.Trim('\n', ' ', '\t', '\r');
-                        var paths = regexPaths.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
-                        if (paths.Length > 0)
-                        {
-                            foreach (var path in paths)
-                            {
-                                File.Move(path, Path.Combine(resultsDirectory, Path.GetFileName(path)), overwrite: true);
-                            }
-                            Directory.Delete(Path.GetDirectoryName(paths[0]), true);
-                        }
-                    }
-                }
-            });
+            //    // Removes guid from tests output path, workaround of https://github.com/microsoft/vstest/issues/2378
+            //    static void MoveAttachmentsToResultsDirectory(string resultsDirectory, string output)
+            //    {
+            //        var attachmentsRegex = new Regex($@"Attachments:(?<filepaths>(?<filepath>[\s]+[^\n]+{Regex.Escape(resultsDirectory)}[^\n]+[\n])+)", RegexOptions.Singleline | RegexOptions.CultureInvariant);
+            //        var match = attachmentsRegex.Match(output);
+            //        if (match.Success)
+            //        {
+            //            var regexPaths = match.Groups["filepaths"].Value.Trim('\n', ' ', '\t', '\r');
+            //            var paths = regexPaths.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+            //            if (paths.Length > 0)
+            //            {
+            //                foreach (var path in paths)
+            //                {
+            //                    File.Move(path, Path.Combine(resultsDirectory, Path.GetFileName(path)), overwrite: true);
+            //                }
+            //                Directory.Delete(Path.GetDirectoryName(paths[0]), true);
+            //            }
+            //        }
+            //    }
+            //});
 
             Target("default", DependsOn("build"));
 
