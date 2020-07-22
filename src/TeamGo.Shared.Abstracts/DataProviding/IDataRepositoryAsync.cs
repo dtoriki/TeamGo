@@ -58,19 +58,11 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
             where TEntity : class, IDataEntity;
         /// <summary>
-        /// Читает множество сущностей из структуры данных
-        /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
-        /// <param name="id">Уникальный идентификатор сущности</param>
-        /// <param name="newEntity">Сущность на замену</param>
-        Task UpdateEntity<TEntity>(Guid id, TEntity newEntity)
-            where TEntity : class, IDataEntity;
-        /// <summary>
         /// Удаляет сущность из структуры данных
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
-        Task DeleteEntity<TEntity>(Guid id)
+        Task DeleteEntityAsync<TEntity>(Guid id)
              where TEntity : class, IDataEntity;
     }
 }

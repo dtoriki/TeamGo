@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5191A3B-9EB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared.Abstracts", "src\TeamGo.Shared.Abstracts\TeamGo.Shared.Abstracts.csproj", "{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared", "src\TeamGo.Shared\TeamGo.Shared.csproj", "{496B83E0-836B-4A83-89AF-087F82515D57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496B83E0-836B-4A83-89AF-087F82515D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496B83E0-836B-4A83-89AF-087F82515D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496B83E0-836B-4A83-89AF-087F82515D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496B83E0-836B-4A83-89AF-087F82515D57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
+		{496B83E0-836B-4A83-89AF-087F82515D57} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93E2D582-1AD3-4334-B681-B818516E5BDC}
