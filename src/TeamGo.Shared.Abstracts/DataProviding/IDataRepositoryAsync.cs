@@ -8,7 +8,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
     /// Представляет собой репозиторий поставщика данных.
     /// </summary>
     /// <typeparam name="TDataProvider">Тип поставщика данных <see cref="IDataProvider"/></typeparam>
-    public interface IDataRepositoryAsync<TDataProvider>
+    public interface IDataRepositoryAsync<TDataProvider> : IDisposable
         where TDataProvider : IDataProvider
     {
         /// <summary>
