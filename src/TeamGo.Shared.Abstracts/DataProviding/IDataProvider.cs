@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace TeamGo.Shared.Abstracts.DataProviding
 {
@@ -7,5 +8,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
     /// </summary>
     public interface IDataProvider : IDisposable
     {
+        Task SaveAsync();
+        void Save();
     }
 }
