@@ -64,17 +64,17 @@ namespace Build
                 Verbose = verbose,
             };
 
-            var dotnet = TryFindDotNetExePath()
+            string dotnet = TryFindDotNetExePath()
                 ?? throw new FileNotFoundException("'dotnet' command isn't found. Try to set DOTNET_ROOT variable.");
 
             Target("restore-tools", async () => {
-                var cmd = await Cli.Wrap(dotnet).WithArguments($"tool restore --ignore-failed-sources").ToConsole()
+                BufferedCommandResult cmd = await Cli.Wrap(dotnet).WithArguments($"tool restore --ignore-failed-sources").ToConsole()
                     .ExecuteBufferedAsync().Task.ConfigureAwait(false);
             });
 
             Target("restore", async () => {
-                var isPublicRelease = bool.Parse(Environment.GetEnvironmentVariable("NBGV_PublicRelease") ?? "false");
-                var cmd = await Cli.Wrap(dotnet).WithArguments($"msbuild -noLogo " +
+                bool isPublicRelease = bool.Parse(Environment.GetEnvironmentVariable("NBGV_PublicRelease") ?? "false");
+                BufferedCommandResult cmd = await Cli.Wrap(dotnet).WithArguments($"msbuild -noLogo " +
                     "-t:Restore " +
                     "-p:RestoreForce=true " +
                     "-p:RestoreIgnoreFailedSources=True " +
@@ -86,64 +86,63 @@ namespace Build
             });
 
             Target("build", async () => {
-                var cmd = await Cli.Wrap(dotnet).WithArguments($"build -noLogo -c {configuration}")
+                BufferedCommandResult cmd = await Cli.Wrap(dotnet).WithArguments($"build -noLogo -c {configuration}")
                     .ToConsole()
                     .ExecuteBufferedAsync().Task.ConfigureAwait(false);
             });
 
-            //Target("coverage", async () =>
-            //{
-            //    var resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
-            //    if (!Directory.Exists(resultsDirectory))
-            //        Directory.CreateDirectory(resultsDirectory);
-            //    var cmd = await Cli.Wrap(dotnet)
-            //        .WithArguments($"test " +
-            //        "--nologo " +
-            //        "--no-restore " +
-            //        $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
-            //        $"--logger trx;LogFileName=\"{Path.Combine(resultsDirectory, "tests.trx").Replace("\"", "\\\"")}\" " +
-            //        $"-c {configuration} " +
-            //        "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=json,cobertura"
-            //        )
-            //        .ToConsole()
-            //        .ExecuteBufferedAsync().Task.ConfigureAwait(false);
+            Target("coverage", async () => {
+                string resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
+                if (!Directory.Exists(resultsDirectory))
+                    Directory.CreateDirectory(resultsDirectory);
+                BufferedCommandResult cmd = await Cli.Wrap(dotnet)
+                    .WithArguments($"test " +
+                    "--nologo " +
+                    "--no-restore " +
+                    $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
+                    $"--logger trx;LogFileName=\"{Path.Combine(resultsDirectory, "tests.trx").Replace("\"", "\\\"")}\" " +
+                    $"-c {configuration} " +
+                    "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=json,cobertura"
+                    )
+                    .ToConsole()
+                    .ExecuteBufferedAsync().Task.ConfigureAwait(false);
 
-            //    MoveAttachmentsToResultsDirectory(resultsDirectory, cmd.StandardOutput);
-            //    TryRemoveTestsOutputDirectories(resultsDirectory);
+                MoveAttachmentsToResultsDirectory(resultsDirectory, cmd.StandardOutput);
+                TryRemoveTestsOutputDirectories(resultsDirectory);
 
-            //    // Removes all files in inner folders, workaround of https://github.com/microsoft/vstest/issues/2334
-            //    static void TryRemoveTestsOutputDirectories(string resultsDirectory)
-            //    {
-            //        foreach (var directory in Directory.EnumerateDirectories(resultsDirectory))
-            //        {
-            //            try
-            //            {
-            //                Directory.Delete(directory, recursive: true);
-            //            }
-            //            catch { }
-            //        }
-            //    }
+                // Removes all files in inner folders, workaround of https://github.com/microsoft/vstest/issues/2334
+                static void TryRemoveTestsOutputDirectories(string resultsDirectory)
+                {
+                    foreach (string directory in Directory.EnumerateDirectories(resultsDirectory))
+                    {
+                        try
+                        {
+                            Directory.Delete(directory, recursive: true);
+                        }
+                        catch { }
+                    }
+                }
 
-            //    // Removes guid from tests output path, workaround of https://github.com/microsoft/vstest/issues/2378
-            //    static void MoveAttachmentsToResultsDirectory(string resultsDirectory, string output)
-            //    {
-            //        var attachmentsRegex = new Regex($@"Attachments:(?<filepaths>(?<filepath>[\s]+[^\n]+{Regex.Escape(resultsDirectory)}[^\n]+[\n])+)", RegexOptions.Singleline | RegexOptions.CultureInvariant);
-            //        var match = attachmentsRegex.Match(output);
-            //        if (match.Success)
-            //        {
-            //            var regexPaths = match.Groups["filepaths"].Value.Trim('\n', ' ', '\t', '\r');
-            //            var paths = regexPaths.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
-            //            if (paths.Length > 0)
-            //            {
-            //                foreach (var path in paths)
-            //                {
-            //                    File.Move(path, Path.Combine(resultsDirectory, Path.GetFileName(path)), overwrite: true);
-            //                }
-            //                Directory.Delete(Path.GetDirectoryName(paths[0]), true);
-            //            }
-            //        }
-            //    }
-            //});
+                // Removes guid from tests output path, workaround of https://github.com/microsoft/vstest/issues/2378
+                static void MoveAttachmentsToResultsDirectory(string resultsDirectory, string output)
+                {
+                    Regex attachmentsRegex = new Regex($@"Attachments:(?<filepaths>(?<filepath>[\s]+[^\n]+{Regex.Escape(resultsDirectory)}[^\n]+[\n])+)", RegexOptions.Singleline | RegexOptions.CultureInvariant);
+                    Match match = attachmentsRegex.Match(output);
+                    if (match.Success)
+                    {
+                        string regexPaths = match.Groups["filepaths"].Value.Trim('\n', ' ', '\t', '\r');
+                        string[] paths = regexPaths.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+                        if (paths.Length > 0)
+                        {
+                            foreach (string path in paths)
+                            {
+                                File.Move(path, Path.Combine(resultsDirectory, Path.GetFileName(path)), overwrite: true);
+                            }
+                            Directory.Delete(Path.GetDirectoryName(paths[0]), true);
+                        }
+                    }
+                }
+            });
 
             Target("default", DependsOn("build"));
 
@@ -163,25 +162,25 @@ namespace Build
 
         private static string? TryFindDotNetExePath()
         {
-            var dotnet = "dotnet";
+            string dotnet = "dotnet";
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 dotnet += ".exe";
 
-            var mainModule = Process.GetCurrentProcess().MainModule;
+            ProcessModule mainModule = Process.GetCurrentProcess().MainModule;
             if (!string.IsNullOrEmpty(mainModule?.FileName) && Path.GetFileName(mainModule.FileName)!.Equals(dotnet, StringComparison.OrdinalIgnoreCase))
                 return mainModule.FileName;
 
-            var environmentVariable = Environment.GetEnvironmentVariable("DOTNET_ROOT");
+            string? environmentVariable = Environment.GetEnvironmentVariable("DOTNET_ROOT");
             if (!string.IsNullOrEmpty(environmentVariable))
                 return Path.Combine(environmentVariable, dotnet);
 
-            var paths = Environment.GetEnvironmentVariable("PATH");
+            string? paths = Environment.GetEnvironmentVariable("PATH");
             if (paths == null)
                 return null;
 
-            foreach (var path in paths.Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string path in paths.Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = Path.Combine(path, dotnet);
+                string fullPath = Path.Combine(path, dotnet);
                 if (File.Exists(fullPath))
                     return fullPath;
             }
