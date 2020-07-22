@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Primitives", "src\TeamGo.Primitives\TeamGo.Primitives.csproj", "{8652DD89-9426-48B8-B09B-AEA0E9A4FA2F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared.Abstracts", "src\TeamGo.Shared.Abstracts\TeamGo.Shared.Abstracts.csproj", "{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +13,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8652DD89-9426-48B8-B09B-AEA0E9A4FA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8652DD89-9426-48B8-B09B-AEA0E9A4FA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8652DD89-9426-48B8-B09B-AEA0E9A4FA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8652DD89-9426-48B8-B09B-AEA0E9A4FA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B8D217D9-0513-47CE-B590-2466E1992478} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
+		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93E2D582-1AD3-4334-B681-B818516E5BDC}

@@ -1,4 +1,4 @@
-namespace TeamGo.Primitives.DataProviding
+namespace TeamGo.Shared.Abstracts.DataProviding
 {
     /// <summary>
     /// Представляет поставщика данных.
