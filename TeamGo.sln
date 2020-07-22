@@ -5,9 +5,14 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared.Abstracts", "src\TeamGo.Shared.Abstracts\TeamGo.Shared.Abstracts.csproj", "{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Shared.Abstracts", "src\TeamGo.Shared.Abstracts\TeamGo.Shared.Abstracts.csproj", "{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared", "src\TeamGo.Shared\TeamGo.Shared.csproj", "{496B83E0-836B-4A83-89AF-087F82515D57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Shared", "src\TeamGo.Shared\TeamGo.Shared.csproj", "{496B83E0-836B-4A83-89AF-087F82515D57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{349C8E6A-7D9F-4BDC-9C17-9BB300898B1A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
