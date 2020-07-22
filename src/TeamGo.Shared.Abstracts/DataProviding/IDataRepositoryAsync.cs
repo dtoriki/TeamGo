@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TeamGo.Primitives.DataProviding
+namespace TeamGo.Shared.Abstracts.DataProviding
 {
     /// <summary>
     /// Представляет собой репозиторий поставщика данных.

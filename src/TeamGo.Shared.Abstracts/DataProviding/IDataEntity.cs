@@ -1,6 +1,6 @@
 using System;
 
-namespace TeamGo.Primitives.DataProviding
+namespace TeamGo.Shared.Abstracts.DataProviding
 {
     /// <summary>
     /// Представляет сущность данных.
