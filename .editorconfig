@@ -131,7 +131,7 @@ csharp_style_inlined_variable_declaration = true:warning
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#expression_level_csharp
 csharp_prefer_simple_default_expression = true:warning
 csharp_style_deconstructed_variable_declaration = true:warning
-csharp_style_pattern_local_over_anonymous_function = true:warning
+csharp_style_pattern_local_over_anonymous_function = false:warning
 # "Null" checking preferences
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#null_checking_csharp
 csharp_style_throw_expression = true:warning

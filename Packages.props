@@ -9,6 +9,12 @@
 		<PackageReference Update="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20303.1" />
 		
 		<PackageReference Update="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.6" />
+
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Update="xunit" Version="2.4.0" />
+    <PackageReference Update="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Update="coverlet.collector" Version="1.0.1" />
 		
 		<PackageReference Update="Nerdbank.GitVersioning" Version="3.2.7-beta" PrivateAssets="All" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
 	</ItemGroup>

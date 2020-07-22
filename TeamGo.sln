@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Packages.props = Packages.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tets", "tets", "{F03C8761-1056-407D-9E04-460A5F76E9B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{B87621B2-369A-466A-A612-FFEDB4D101C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Shared.Tests.Unit", "tets\TeamGo.Shared.Tests.Unit\TeamGo.Shared.Tests.Unit.csproj", "{2FA6C365-8A86-44BE-9A12-663033EB193E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +35,10 @@ Global
 		{496B83E0-836B-4A83-89AF-087F82515D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{496B83E0-836B-4A83-89AF-087F82515D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{496B83E0-836B-4A83-89AF-087F82515D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA6C365-8A86-44BE-9A12-663033EB193E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA6C365-8A86-44BE-9A12-663033EB193E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA6C365-8A86-44BE-9A12-663033EB193E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA6C365-8A86-44BE-9A12-663033EB193E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +46,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7CCE4FBD-3E77-4F9F-BA53-D43EA8885D72} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
 		{496B83E0-836B-4A83-89AF-087F82515D57} = {B5191A3B-9EB2-4E38-8D40-8DC0A4EE136A}
+		{B87621B2-369A-466A-A612-FFEDB4D101C1} = {F03C8761-1056-407D-9E04-460A5F76E9B3}
+		{2FA6C365-8A86-44BE-9A12-663033EB193E} = {B87621B2-369A-466A-A612-FFEDB4D101C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93E2D582-1AD3-4334-B681-B818516E5BDC}
