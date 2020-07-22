@@ -121,7 +121,7 @@ namespace TeamGo.Shared.DataProviding
         private async Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity>(Func<TEntity, bool> predicate, TContext context)
            where TEntity : class, IDataEntity
         {
-            return await Task.Run(() => context.Set<TEntity>().Where(predicate));
+            return await Task.Run(() => context.Set<TEntity>().Where(predicate).ToList());
         }
 
         private async Task<TEntity> ReadEntityAsync<TEntity>(Guid id, TContext context)
