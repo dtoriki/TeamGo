@@ -28,13 +28,13 @@ jobs:
         run: dotnet run --project Build --configuration Release --no-launch-profile -- --configuration Debug restore
       - name: Build check
         run: dotnet run --project Build --configuration Release --no-launch-profile -- --configuration Debug build
-      #- name: Unit tests
-      #  run: dotnet run --project build --configuration Release --no-launch-profile -- --configuration Debug coverage
-      #- name: Codecov
-      #  uses: codecov/codecov-action@v1.0.7
-      #  with:
-      #    name: codecov-bot
-      #    file: "artifacts/tests/output/coverage.cobertura.xml"
-      #    flags: unit
-      #    fail_ci_if_error: true
-      #
+      - name: Unit tests
+        run: dotnet run --project build --configuration Release --no-launch-profile -- --configuration Debug coverage
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.7
+        with:
+          name: codecov-bot
+          file: "artifacts/tests/output/coverage.cobertura.xml"
+          flags: unit
+          fail_ci_if_error: true
+      
