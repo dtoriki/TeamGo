@@ -19,7 +19,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Добавляет сущность в структуру данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="entity">Сущность для добавления</param>
         /// <returns>Присвоенный уникальный идентификатор</returns>
         Task<Guid> CreateEntityAsync<TEntity>(TEntity entity)
@@ -44,7 +44,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает множество сущностей из структуры данных.
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="predicate">Условие выбора сущностей</param>
         /// <returns>Сущности</returns>
         Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity>(Func<TEntity, bool> predicate)
@@ -52,7 +52,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает множество сущностей из структуры данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <param name="updateAction">Действия обновления</param>
         Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
@@ -60,7 +60,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает множество сущностей из структуры данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <param name="newEntity">Сущность на замену</param>
         Task UpdateEntity<TEntity>(Guid id, TEntity newEntity)
@@ -68,7 +68,9 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Удаляет сущность из структуры данных
         /// </summary>
+        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
-        Task DeleteEntity(Guid id);
+        Task DeleteEntity<TEntity>(Guid id)
+             where TEntity : class, IDataEntity;
     }
 }
