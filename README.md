@@ -1,5 +1,5 @@
 # TeamGo
-	Инструменты, упрощающие работу разработчиков в команде
+
 ## Builds
 ![Windows](https://github.com/dtoriki/TeamGo/workflows/Windows/badge.svg?branch=dev)
 ## Tests Coverage
