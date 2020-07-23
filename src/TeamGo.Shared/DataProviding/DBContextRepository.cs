@@ -100,7 +100,7 @@ namespace TeamGo.Shared.DataProviding
 
         public void Dispose()
         {
-            if (_isDisposed)
+            if (!_isDisposed)
             {
 #pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
                 ProviderConstructor = null;
