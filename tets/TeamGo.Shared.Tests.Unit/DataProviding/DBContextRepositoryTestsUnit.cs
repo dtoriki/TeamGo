@@ -77,7 +77,7 @@ namespace TeamGo.Shared.Tests.Unit.DataProviding
         }
 
         [Fact]
-        public async void Get_Entity_From_Database_by_Id()
+        public async void Try_Get_Entity_From_Database_by_Id()
         {
             int iterations = 10;
             List<Guid> generatedGuids = new List<Guid>();
@@ -121,7 +121,7 @@ namespace TeamGo.Shared.Tests.Unit.DataProviding
         }
 
         [Fact]
-        public async void Get_Multiply_Entities_By_Predicate()
+        public async void Try_Get_Multiply_Entities_By_Predicate()
         {
             Random rnd = new Random();
             int iterationsForInt = rnd.Next(1, 11);
@@ -157,6 +157,143 @@ namespace TeamGo.Shared.Tests.Unit.DataProviding
 
                 Assert.True(actual);
             }
+        }
+
+        [Fact]
+        public async void Try_Update_Entity()
+        {
+            Random rnd = new Random();
+            int intData = rnd.Next(10);
+            TestEntity testEntity = new TestEntity()
+            {
+                IntData = intData,
+                StringData = "10"
+            };
+
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+            {
+                Guid id = await repository.CreateEntityAsync(testEntity);
+
+                int newIntData = rnd.Next(20, 50);
+                await repository.UpdateEntity<TestEntity>(id, x => x.IntData = newIntData);
+
+                int actual = (await repository.ReadEntityAsync<TestEntity>(id)).IntData;
+
+                Assert.Equal(newIntData, actual);
+            }
+        }
+
+        [Fact]
+        public async void Try_Remove_Entity()
+        {
+            TestEntity testEntity = new TestEntity()
+            {
+                IntData = 10,
+                StringData = "10"
+            };
+
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+            {
+                Guid id = await repository.CreateEntityAsync(testEntity);
+
+                bool wasCreated = (await repository.ReadEntityAsync<TestEntity>(id)) != null;
+
+                await repository.DeleteEntityAsync<TestEntity>(id);
+
+                bool wasDeleted = (await repository.ReadEntityAsync<TestEntity>(id)) == null;
+
+                bool actual = wasCreated && wasDeleted;
+
+                Assert.True(actual);
+            }
+        }
+
+        [Fact]
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+        public void Ctor_Throws_Argument_Null_Exception() => _ = Assert.Throws<ArgumentNullException>(() => new DBContextRepository<TestDbContext>(null));
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+
+        [Fact]
+        public async void CreateEntityAsync_With_Preseted_Entity_Throws_Object_Disposed_Exception_WhenRepository_Disposed()
+        {
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            _ = await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            {
+                DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor);
+                repository.Dispose();
+
+                _ = await repository.CreateEntityAsync(new TestEntity());
+            });
+        }
+
+        [Fact]
+        public async void CreateEntityAsync_With_Preseted_Entity_Throws_Argument_Null_Exception()
+        {
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            _ = await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+                {
+
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                    _ = await repository.CreateEntityAsync<TestEntity>(entity: null);
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                }
+
+            });
+        }
+
+        [Fact]
+        public async void CreateEntityAsync_With_Optional_Entity_Throws_Argument_Null_Exception()
+        {
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            _ = await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+                {
+
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                    _ = await repository.CreateEntityAsync<TestEntity>(entityOptions: null);
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                }
+
+            });
+        }
+
+        [Fact]
+        public async void ReadEntitiesAsync_Throws_Argument_Null_Exception()
+        {
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            _ = await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+                {
+
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                    _ = await repository.ReadEntitiesAsync<TestEntity>(predicate: null);
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                }
+
+            });
+        }
+
+        [Fact]
+        public async void UpdateEntity_Throws_Argument_Null_Exception()
+        {
+            Func<TestDbContext> contextConstrucor = () => new TestDbContext(_dynamicOptions);
+            _ = await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                using (DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor))
+                {
+
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                    await repository.UpdateEntity<TestEntity>(Guid.NewGuid(), null);
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                }
+
+            });
         }
     }
 }
