@@ -1,5 +1,10 @@
 # TeamGo
 	Инструменты, упрощающие работу разработчиков в команде
+## Builds
+![Windows](https://github.com/dtoriki/TeamGo/workflows/Windows/badge.svg?branch=dev)
+## Tests Coverage
+![Unit](https://github.com/dtoriki/TeamGo/workflows/Unit/badge.svg)
+[![codecov](https://codecov.io/gh/dtoriki/TeamGo/branch/dev/graph/badge.svg)](https://codecov.io/gh/dtoriki/TeamGo)
 ## Правила коментирования коммитов:
 	- Каждый коммит должен начинаться с характеристики изменений, которые вносятся
 ##### Используемые характеристики: 
