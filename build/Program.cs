@@ -91,12 +91,13 @@ namespace Build
                     .ExecuteBufferedAsync().Task.ConfigureAwait(false);
             });
 
-            Target("coverage", async () => {
+            Target("unit_test", async () => {
                 string resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
                 if (!Directory.Exists(resultsDirectory))
                     Directory.CreateDirectory(resultsDirectory);
                 BufferedCommandResult cmd = await Cli.Wrap(dotnet)
                     .WithArguments($"test " +
+                    "~/tests/unit" +
                     "--nologo " +
                     "--no-restore " +
                     $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
