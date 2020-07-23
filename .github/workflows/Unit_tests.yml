@@ -31,7 +31,7 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v1.0.7
         with:
-          file: "artifacts/tests/output/coverage.cobertura.xml"
+          file: "artifacts/tests/unit/output/coverage.cobertura.xml"
           flags: unit
           fail_ci_if_error: true
       
