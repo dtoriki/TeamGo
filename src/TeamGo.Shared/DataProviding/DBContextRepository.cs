@@ -79,6 +79,10 @@ namespace TeamGo.Shared.DataProviding
         public async Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
             where TEntity : class, IDataEntity
         {
+            if (updateAction == null)
+            {
+                throw new ArgumentNullException();
+            }
             if (_isDisposed)
             {
                 throw new ObjectDisposedException(nameof(DBContextRepository<TContext>));
