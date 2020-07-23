@@ -92,12 +92,12 @@ namespace Build
             });
 
             Target("unit_test", async () => {
-                string resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "output"));
+                string resultsDirectory = Path.GetFullPath(Path.Combine("artifacts", "tests", "unit", "output"));
                 if (!Directory.Exists(resultsDirectory))
                     Directory.CreateDirectory(resultsDirectory);
                 BufferedCommandResult cmd = await Cli.Wrap(dotnet)
                     .WithArguments($"test " +
-                    "--filter FullyQualifiedName~Unit" +
+                    "--filter FullyQualifiedName~Unit " +
                     "--nologo " +
                     "--no-restore " +
                     $"--collect:\"XPlat Code Coverage\" --results-directory {resultsDirectory} " +
