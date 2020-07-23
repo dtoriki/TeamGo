@@ -36,6 +36,10 @@ namespace TeamGo.Shared.DataProviding
         public async Task<Guid> CreateEntityAsync<TEntity>(Action<TEntity> entityOptions)
             where TEntity : class, IDataEntity, new()
         {
+            if (entityOptions == null)
+            {
+                throw new ArgumentNullException();
+            }
             if (_isDisposed)
             {
                 throw new ObjectDisposedException(nameof(DBContextRepository<TContext>));
