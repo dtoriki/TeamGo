@@ -133,7 +133,7 @@ namespace TeamGo.Shared.DataProviding
         private async Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction, TContext context)
             where TEntity : class, IDataEntity
         {
-            TEntity entity = await ReadEntityAsync<TEntity>(id);
+            TEntity entity = await ReadEntityAsync<TEntity>(id, context);
             updateAction.Invoke(entity);
             await context.SaveAsync();
         }
