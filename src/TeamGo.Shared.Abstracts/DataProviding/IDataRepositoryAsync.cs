@@ -6,8 +6,11 @@ namespace TeamGo.Shared.Abstracts.DataProviding
 {
     /// <summary>
     /// Представляет собой репозиторий поставщика данных.
+    /// <remark>
+    /// Реализует <see cref="IDisposable"/>
+    /// </remark>
     /// </summary>
-    /// <typeparam name="TDataProvider">Тип поставщика данных <see cref="IDataProvider"/></typeparam>
+    /// <typeparam name="TDataProvider">Тип поставщика данных. Реализует <see cref="IDataProvider"/></typeparam>
     public interface IDataRepositoryAsync<TDataProvider> : IDisposable
         where TDataProvider : IDataProvider
     {
@@ -19,7 +22,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Добавляет сущность в структуру данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="entity">Сущность для добавления</param>
         /// <returns>Присвоенный уникальный идентификатор</returns>
         Task<Guid> CreateEntityAsync<TEntity>(TEntity entity)
@@ -27,7 +30,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Добавляет сущность в структуру данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="entityOptions">Настройки добавляемой сущности</param>
         /// <returns>Присвоенный уникальный идентификатор</returns>
         Task<Guid> CreateEntityAsync<TEntity>(Action<TEntity> entityOptions)
@@ -35,8 +38,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает сущность из структуры данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity{TId}"/></typeparam>
-        /// <typeparam name="TId">Тип уникального идентификатора сущности</typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <returns>Сущность</returns>
         Task<TEntity> ReadEntityAsync<TEntity>(Guid id)
@@ -44,7 +46,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает множество сущностей из структуры данных.
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="predicate">Условие выбора сущностей</param>
         /// <returns>Сущности</returns>
         Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity>(Func<TEntity, bool> predicate)
@@ -52,7 +54,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Читает множество сущностей из структуры данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         /// <param name="updateAction">Действия обновления</param>
         Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
@@ -60,7 +62,7 @@ namespace TeamGo.Shared.Abstracts.DataProviding
         /// <summary>
         /// Удаляет сущность из структуры данных
         /// </summary>
-        /// <typeparam name="TEntity">Тип сущности <see cref="IDataEntity"/></typeparam>
+        /// <typeparam name="TEntity">Тип сущности, реализует <see cref="IDataEntity"/></typeparam>
         /// <param name="id">Уникальный идентификатор сущности</param>
         Task DeleteEntityAsync<TEntity>(Guid id)
              where TEntity : class, IDataEntity;

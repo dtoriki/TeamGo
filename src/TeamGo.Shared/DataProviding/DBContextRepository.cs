@@ -7,19 +7,48 @@ using TeamGo.Shared.Abstracts.DataProviding;
 
 namespace TeamGo.Shared.DataProviding
 {
+
+    /// <summary>
+    /// Предоставляет возможность управления данными для <see cref="DbContext" />.
+    /// Является реализацией <see cref="IDisposable"/>. 
+    /// </summary>
+    /// <remarks>
+    /// <see cref="DbContext"/> Должен реализовать <see cref="IDataProvider"/>
+    /// </remarks>
+    /// <typeparam name="TContext">
+    /// Тип базы данных.
+    /// Должен быть наследником <see cref="DbContext"/>,
+    /// и реализовывать интерфейс <see cref="IDataProvider"/>
+    /// </typeparam>
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ObjectDisposedException" />
     public sealed class DBContextRepository<TContext> : IDataRepositoryAsync<TContext>
         where TContext : DbContext, IDataProvider
     {
         private bool _isDisposed;
 
+        /// <inheritdoc />
+        /// <remarks>
+        /// Результатом функции является наследник <see cref="DbContext"/>,
+        /// реализующий интерфейс <see cref="IDataProvider"/>
+        /// </remarks>
         public Func<TContext> ProviderConstructor { get; private set; }
 
+        /// <summary>
+        /// Создаёт экземпляр <see cref="DBContextRepository{TContext}"/>
+        /// </summary>
+        /// <param name="providerConstructor">Функция создания экземпляра <typeparamref name="TContext"/></param>
+        
+        /// <exception cref="ArgumentNullException" />
         public DBContextRepository(Func<TContext> providerConstructor)
         {
             _isDisposed = false;
             ProviderConstructor = providerConstructor ?? throw new ArgumentNullException();
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
         public async Task<Guid> CreateEntityAsync<TEntity>(TEntity entity)
             where TEntity : class, IDataEntity
         {
@@ -33,6 +62,9 @@ namespace TeamGo.Shared.DataProviding
             }
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// /// <exception cref="ObjectDisposedException" />
         public async Task<Guid> CreateEntityAsync<TEntity>(Action<TEntity> entityOptions)
             where TEntity : class, IDataEntity, new()
         {
@@ -50,6 +82,9 @@ namespace TeamGo.Shared.DataProviding
             return await CreateEntityAsync(entity);
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
         public async Task<IEnumerable<TEntity>> ReadEntitiesAsync<TEntity>(Func<TEntity, bool> predicate)
             where TEntity : class, IDataEntity
         {
@@ -63,6 +98,9 @@ namespace TeamGo.Shared.DataProviding
             }
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
         public async Task<TEntity> ReadEntityAsync<TEntity>(Guid id)
             where TEntity : class, IDataEntity
         {
@@ -76,6 +114,9 @@ namespace TeamGo.Shared.DataProviding
             }
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
         public async Task UpdateEntity<TEntity>(Guid id, Action<TEntity> updateAction)
             where TEntity : class, IDataEntity
         {
@@ -93,6 +134,9 @@ namespace TeamGo.Shared.DataProviding
             }
         }
 
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
         public async Task DeleteEntityAsync<TEntity>(Guid id)
             where TEntity : class, IDataEntity
         {
@@ -106,6 +150,7 @@ namespace TeamGo.Shared.DataProviding
             }
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (!_isDisposed)

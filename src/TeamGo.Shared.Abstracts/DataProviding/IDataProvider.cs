@@ -8,7 +8,13 @@ namespace TeamGo.Shared.Abstracts.DataProviding
     /// </summary>
     public interface IDataProvider : IDisposable
     {
+        /// <summary>
+        /// Ассинхронно сохраняет данные
+        /// </summary>
         Task SaveAsync();
+        /// <summary>
+        /// Сохраняет данные
+        /// </summary>
         void Save();
     }
 }
