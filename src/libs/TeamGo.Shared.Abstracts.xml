@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TeamGo.Shared.Abstracts</name>
+    </assembly>
+    <members>
+        <member name="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity">
+            <summary>
+            Представляет сущность данных.
+            </summary>
+        </member>
+        <member name="T:TeamGo.Shared.Abstracts.DataProviding.IDataProvider">
+            <summary>
+            Представляет поставщика данных.
+            </summary>
+        </member>
+        <member name="T:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1">
+            <summary>
+            Представляет собой репозиторий поставщика данных.
+            <remark>
+            Реализует <see cref="T:System.IDisposable"/>
+            </remark>
+            </summary>
+            <typeparam name="TDataProvider">Тип поставщика данных. Реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataProvider"/></typeparam>
+        </member>
+        <member name="P:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.ProviderConstructor">
+            <summary>
+            Конструктор поставщика данных
+            </summary>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.CreateEntityAsync``1(``0)">
+            <summary>
+            Добавляет сущность в структуру данных
+            </summary>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
+            <param name="entity">Сущность для добавления</param>
+            <returns>Присвоенный уникальный идентификатор</returns>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.CreateEntityAsync``1(System.Action{``0})">
+            <summary>
+            Добавляет сущность в структуру данных
+            </summary>
+            <typeparam name="TEntity">Тип сущности <see cref="!:IDataEntity&lt;TId&gt;"/></typeparam>
+            <param name="entityOptions">Настройки добавляемой сущности</param>
+            <returns>Присвоенный уникальный идентификатор</returns>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.ReadEntityAsync``1(System.Guid)">
+            <summary>
+            Читает сущность из структуры данных
+            </summary>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
+            <param name="id">Уникальный идентификатор сущности</param>
+            <returns>Сущность</returns>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.ReadEntitiesAsync``1(System.Func{``0,System.Boolean})">
+            <summary>
+            Читает множество сущностей из структуры данных.
+            </summary>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
+            <param name="predicate">Условие выбора сущностей</param>
+            <returns>Сущности</returns>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.UpdateEntity``1(System.Guid,System.Action{``0})">
+            <summary>
+            Читает множество сущностей из структуры данных
+            </summary>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
+            <param name="id">Уникальный идентификатор сущности</param>
+            <param name="updateAction">Действия обновления</param>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1.DeleteEntityAsync``1(System.Guid)">
+            <summary>
+            Удаляет сущность из структуры данных
+            </summary>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
+            <param name="id">Уникальный идентификатор сущности</param>
+        </member>
+    </members>
+</doc>

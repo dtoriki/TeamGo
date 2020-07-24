@@ -7,6 +7,9 @@ namespace TeamGo.Shared.Abstracts.DataProviding
     /// </summary>
     public interface IDataEntity
     {
+        /// <summary>
+        /// Уникальный идентификатор
+        /// </summary>
         public Guid Id { get; }
     }
 }
