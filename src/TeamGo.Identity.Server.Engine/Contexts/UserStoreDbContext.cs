@@ -29,10 +29,12 @@ namespace TeamGo.Identity.Server.Engine.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder
+            _ = modelBuilder
                 .Entity<RoleEntity>()
                 .HasOne(x => x.User)
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                 .WithMany(x => x.Roles)
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
         }
