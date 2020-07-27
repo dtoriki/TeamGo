@@ -9,9 +9,24 @@
             Представляет сущность данных.
             </summary>
         </member>
+        <member name="P:TeamGo.Shared.Abstracts.DataProviding.IDataEntity.Id">
+            <summary>
+            Уникальный идентификатор
+            </summary>
+        </member>
         <member name="T:TeamGo.Shared.Abstracts.DataProviding.IDataProvider">
             <summary>
             Представляет поставщика данных.
+            </summary>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataProvider.SaveAsync">
+            <summary>
+            Ассинхронно сохраняет данные
+            </summary>
+        </member>
+        <member name="M:TeamGo.Shared.Abstracts.DataProviding.IDataProvider.Save">
+            <summary>
+            Сохраняет данные
             </summary>
         </member>
         <member name="T:TeamGo.Shared.Abstracts.DataProviding.IDataRepositoryAsync`1">
@@ -40,7 +55,7 @@
             <summary>
             Добавляет сущность в структуру данных
             </summary>
-            <typeparam name="TEntity">Тип сущности <see cref="!:IDataEntity&lt;TId&gt;"/></typeparam>
+            <typeparam name="TEntity">Тип сущности, реализует <see cref="T:TeamGo.Shared.Abstracts.DataProviding.IDataEntity"/></typeparam>
             <param name="entityOptions">Настройки добавляемой сущности</param>
             <returns>Присвоенный уникальный идентификатор</returns>
         </member>
