@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TeamGo.Shared.Abstracts.DataProviding;
 
-namespace TeamGo.Shared.Tests.Unit.TestClasses
+namespace Test.Engine
 {
-    public class TestDbContext : DbContext, IDataProvider
+    internal class TestDbContext : DbContext, IDataProvider
     {
         public DbSet<TestEntity> TestTable { get; set; }
 

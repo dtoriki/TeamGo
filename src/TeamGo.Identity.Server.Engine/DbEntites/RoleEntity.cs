@@ -5,7 +5,7 @@ namespace TeamGo.Identity.Server.Engine.DbEntites
 {
     internal class RoleEntity : IDataEntity
     {
-        public Guid Id { get; }
+        public Guid Id { get; set;  }
 
 #pragma warning disable CS8618 // Поле, не допускающее значение NULL, не инициализировано. Рекомендуется объявить его как допускающее значение NULL.
         public string Role { get; set; }

@@ -22,28 +22,38 @@ namespace TeamGo.Shared.DataProviding
     /// </typeparam>
     /// <exception cref="ArgumentNullException" />
     /// <exception cref="ObjectDisposedException" />
-    public sealed class DBContextRepository<TContext> : IDataRepositoryAsync<TContext>
+    public sealed class DBContextRepository<TContext> : IDataRepositoryAsync<TContext>, ISoftDeletionAsync
         where TContext : DbContext, IDataProvider
     {
         private bool _isDisposed;
+        private Func<TContext> _providerConstructor;
 
         /// <inheritdoc />
         /// <remarks>
         /// Результатом функции является наследник <see cref="DbContext"/>,
         /// реализующий интерфейс <see cref="IDataProvider"/>
         /// </remarks>
-        public Func<TContext> ProviderConstructor { get; private set; }
+        public Func<TContext> ProviderConstructor
+        {
+            get
+            {
+                if (_isDisposed)
+                {
+                    throw new ObjectDisposedException(nameof(DBContextRepository<TContext>));
+                }
+                return _providerConstructor;
+            }
+        }
 
         /// <summary>
         /// Создаёт экземпляр <see cref="DBContextRepository{TContext}"/>
         /// </summary>
-        /// <param name="providerConstructor">Функция создания экземпляра <typeparamref name="TContext"/></param>
-        
+        /// <param name="providerConstructor">Функция создания экземпляра <typeparamref name="TContext"/></param>     
         /// <exception cref="ArgumentNullException" />
         public DBContextRepository(Func<TContext> providerConstructor)
         {
             _isDisposed = false;
-            ProviderConstructor = providerConstructor ?? throw new ArgumentNullException();
+            _providerConstructor = providerConstructor ?? throw new ArgumentNullException();
         }
 
         /// <inheritdoc />
@@ -151,12 +161,47 @@ namespace TeamGo.Shared.DataProviding
         }
 
         /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
+        public async Task SoftDeleteAsync<TEntity>(Guid id)
+            where TEntity : class, IDataEntity, ISoftDeleteable
+        {
+            await UpdateEntity<TEntity>(id, x =>
+            {
+                x.IsSoftDeleted = true;
+                x.DeleteTime = DateTime.UtcNow;
+            });
+        }
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
+        public async Task RepareAsync<TEntity>(Guid id)
+            where TEntity : class, IDataEntity, ISoftDeleteable
+        {
+            await UpdateEntity<TEntity>(id, x =>
+            {
+                x.IsSoftDeleted = false;
+                x.DeleteTime = null;
+            });
+        }
+        /// <inheritdoc />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ObjectDisposedException" />
+        public async Task<IEnumerable<TEntity>> ReadSoftEntitiesAsync<TEntity>(Func<TEntity, bool> predicate, bool isDeleted = false)
+            where TEntity : class, IDataEntity, ISoftDeleteable
+        {
+            return (await ReadEntitiesAsync(predicate))
+                .Where(x => x.IsSoftDeleted == isDeleted)
+                .ToList();
+        }
+
+        /// <inheritdoc />
         public void Dispose()
         {
             if (!_isDisposed)
             {
 #pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
-                ProviderConstructor = null;
+                _providerConstructor = null;
 #pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
                 _isDisposed = true;
             }
@@ -198,5 +243,6 @@ namespace TeamGo.Shared.DataProviding
             context.Set<TEntity>().Remove(entity);
             await context.SaveAsync();
         }
+
     }
 }

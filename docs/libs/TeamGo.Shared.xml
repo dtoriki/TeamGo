@@ -31,7 +31,7 @@
             <summary>
             Создаёт экземпляр <see cref="T:TeamGo.Shared.DataProviding.DBContextRepository`1"/>
             </summary>
-            <param name="providerConstructor">Функция создания экземпляра <typeparamref name="TContext"/></param>
+            <param name="providerConstructor">Функция создания экземпляра <typeparamref name="TContext"/></param>     
             <exception cref="T:System.ArgumentNullException" />
         </member>
         <member name="M:TeamGo.Shared.DataProviding.DBContextRepository`1.CreateEntityAsync``1(``0)">
@@ -60,6 +60,21 @@
             <exception cref="T:System.ObjectDisposedException" />
         </member>
         <member name="M:TeamGo.Shared.DataProviding.DBContextRepository`1.DeleteEntityAsync``1(System.Guid)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ObjectDisposedException" />
+        </member>
+        <member name="M:TeamGo.Shared.DataProviding.DBContextRepository`1.SoftDeleteAsync``1(System.Guid)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ObjectDisposedException" />
+        </member>
+        <member name="M:TeamGo.Shared.DataProviding.DBContextRepository`1.RepareAsync``1(System.Guid)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ObjectDisposedException" />
+        </member>
+        <member name="M:TeamGo.Shared.DataProviding.DBContextRepository`1.ReadSoftEntitiesAsync``1(System.Func{``0,System.Boolean},System.Boolean)">
             <inheritdoc />
             <exception cref="T:System.ArgumentNullException" />
             <exception cref="T:System.ObjectDisposedException" />
