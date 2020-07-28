@@ -6,7 +6,7 @@ using TeamGo.Shared.DataProviding;
 using Test.Engine;
 using Xunit;
 
-namespace TeamGo.Shared.Tests.Unit
+namespace TeamGo.Tests.Unit.TeamGo.Shared.DataProviding
 {
     public class DBContextRepositoryTestsUnit
     {
@@ -559,7 +559,9 @@ namespace TeamGo.Shared.Tests.Unit
             {
                 DBContextRepository<TestDbContext> repository = new DBContextRepository<TestDbContext>(contextConstrucor);
 
-                await repository.ReadSoftEntitiesAsync<TestEntity>(null);
+#pragma warning disable CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
+                _ = await repository.ReadSoftEntitiesAsync<TestEntity>(null);
+#pragma warning restore CS8625 // Литерал, равный NULL, не может быть преобразован в ссылочный тип, не допускающий значение NULL.
             });
         }
 
