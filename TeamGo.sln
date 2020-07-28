@@ -26,9 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Shared.Tests.Unit", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Identity.Server.Engine", "src\TeamGo.Identity.Server.Engine\TeamGo.Identity.Server.Engine.csproj", "{F499B569-31D5-4AA4-9C62-F830525FBEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Identity.Server.Engine.Tests.Unit", "tests\unit\TeamGo.Identity.Server.Engine.Tests.Unit\TeamGo.Identity.Server.Engine.Tests.Unit.csproj", "{814D19A1-C764-4E00-A0E2-5DF0E2581E23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Identity.Server.Engine.Tests.Unit", "tests\unit\TeamGo.Identity.Server.Engine.Tests.Unit\TeamGo.Identity.Server.Engine.Tests.Unit.csproj", "{814D19A1-C764-4E00-A0E2-5DF0E2581E23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Engine", "tests\Test.Engine\Test.Engine.csproj", "{588F4D81-BA9C-4FDB-9025-F04CC71A6E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Engine", "tests\Test.Engine\Test.Engine.csproj", "{588F4D81-BA9C-4FDB-9025-F04CC71A6E70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
