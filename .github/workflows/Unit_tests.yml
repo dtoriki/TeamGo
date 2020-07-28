@@ -33,7 +33,6 @@ jobs:
         with:
           name: codecov-bot
           file: "artifacts/tests/unit/output/coverage.cobertura.xml"
-          ignore: "TeamGo/tests/Test.Engine"
           flags: unit
           fail_ci_if_error: true
       
