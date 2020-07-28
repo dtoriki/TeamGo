@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\TeamGo\src\libs\TeamGo.Shared.Abstracts.xml</DocumentationFile>
+    <DocumentationFile>C:\TeamGo\docs\libs\TeamGo.Shared.Abstracts.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

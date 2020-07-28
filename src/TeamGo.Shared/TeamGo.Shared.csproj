@@ -6,6 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\TeamGo\docs\libs\TeamGo.Shared.xml</DocumentationFile>
+    <OutputPath>C:\TeamGo\artifacts\bin</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
