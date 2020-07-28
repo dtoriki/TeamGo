@@ -29,11 +29,11 @@ jobs:
       - name: Unit tests
         run: dotnet run --project build --configuration Release --no-launch-profile -- --configuration Debug unit_test
       - name: Codecov
+        ignore: "TeamGo/tests/Test.Engine"
         uses: codecov/codecov-action@v1.0.7
         with:
           name: codecov-bot
           file: "artifacts/tests/unit/output/coverage.cobertura.xml"
-          ignore: "TeamGo/tests/Test.Engine"
           flags: unit
           fail_ci_if_error: true
       
