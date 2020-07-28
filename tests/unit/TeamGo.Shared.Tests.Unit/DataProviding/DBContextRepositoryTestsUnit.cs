@@ -6,7 +6,7 @@ using TeamGo.Shared.DataProviding;
 using Test.Engine;
 using Xunit;
 
-namespace TeamGo.Shared.Tests.Unit.DataProviding
+namespace TeamGo.Shared.Tests.Unit
 {
     public class DBContextRepositoryTestsUnit
     {
