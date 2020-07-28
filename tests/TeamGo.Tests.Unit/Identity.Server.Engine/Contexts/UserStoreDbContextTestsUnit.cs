@@ -4,7 +4,7 @@ using TeamGo.Identity.Server.Engine.DbEntites;
 using Test.Engine;
 using Xunit;
 
-namespace TeamGo.Identity.Server.Engine.Tests.Unit
+namespace TeamGo.Tests.Unit.Identity.Server.Engine.Contexts
 {
     public class UserStoreDbContextTestsUnit
     {
