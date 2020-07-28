@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{349C8E6A-7D9F-4BDC-9C17-9BB300898B1A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		codecov.yml = codecov.yml
 		Packages.props = Packages.props
 	EndProjectSection
 EndProject
@@ -24,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Identity.Server.Engi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Engine", "tests\Test.Engine\Test.Engine.csproj", "{588F4D81-BA9C-4FDB-9025-F04CC71A6E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGo.Tests.Unit", "tests\TeamGo.Tests.Unit\TeamGo.Tests.Unit.csproj", "{1189ACBE-AFD4-44B0-9AA3-C09AD856EDFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGo.Tests.Unit", "tests\TeamGo.Tests.Unit\TeamGo.Tests.Unit.csproj", "{1189ACBE-AFD4-44B0-9AA3-C09AD856EDFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

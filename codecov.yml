@@ -1,1 +1,6 @@
-ignore: "TeamGo/tests/Test.Engine"
+ignore:
+  - "tests/Test.Engine/*.*"
+coverage:
+  precision: 1
+  round: down
+  range: "80...95"
