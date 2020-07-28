@@ -131,16 +131,16 @@ namespace TeamGo.Tests.Unit.TeamGo.Shared.DataProviding
                     await repository.CreateEntityAsync(new TestEntity()
                     {
                         IntData = intFieldData,
-                        StringData = rnd.Next(100).ToString()
+                        StringData = rnd.Next(150,200).ToString()
                     });
                 }
 
-                string stringFieldData = rnd.Next(100).ToString();
+                string stringFieldData = rnd.Next(450, 500).ToString();
                 for (int i = 0; i < iterationsForString; i++)
                 {
                     await repository.CreateEntityAsync(new TestEntity()
                     {
-                        IntData = rnd.Next(100),
+                        IntData = rnd.Next(300, 400),
                         StringData = stringFieldData
                     });
                 }
@@ -428,16 +428,16 @@ namespace TeamGo.Tests.Unit.TeamGo.Shared.DataProviding
                     await repository.CreateEntityAsync(new TestEntity()
                     {
                         IntData = intFieldData,
-                        StringData = rnd.Next(100).ToString()
+                        StringData = rnd.Next(150, 200).ToString()
                     });
                 }
 
-                string stringFieldData = rnd.Next(100).ToString();
+                string stringFieldData = rnd.Next(250, 300).ToString();
                 for (int i = 0; i < iterationsForString; i++)
                 {
                     await repository.CreateEntityAsync(new TestEntity()
                     {
-                        IntData = rnd.Next(100),
+                        IntData = rnd.Next(350, 400),
                         StringData = stringFieldData
                     });
                 }
