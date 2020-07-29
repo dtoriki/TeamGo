@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TeamGo.Identity.Server.Engine.Contexts;
 using TeamGo.Identity.Server.Engine.DbEntites;
-using Test.Engine;
+using TeamGo.Tests.Engine;
 using Xunit;
 
 namespace TeamGo.Tests.Unit.Identity.Server.Engine.Contexts
