@@ -17,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\TeamGo.Identity.Server.Engine\TeamGo.Identity.Server.Engine.csproj" />
     <ProjectReference Include="..\..\src\TeamGo.Shared\TeamGo.Shared.csproj" />
-    <ProjectReference Include="..\Test.Engine\Test.Engine.csproj" />
+    <ProjectReference Include="..\TeamGo.Tests.Engine\TeamGo.Tests.Engine.csproj" />
   </ItemGroup>
 
 </Project>

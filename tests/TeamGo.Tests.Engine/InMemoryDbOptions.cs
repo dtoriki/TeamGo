@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace Test.Engine
+namespace TeamGo.Tests.Engine
 {
     internal static class InMemoryDbOptions
     {

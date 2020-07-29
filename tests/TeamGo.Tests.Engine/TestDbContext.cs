@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TeamGo.Shared.Abstracts.DataProviding;
 
-namespace Test.Engine
+namespace TeamGo.Tests.Engine
 {
     internal class TestDbContext : DbContext, IDataProvider
     {

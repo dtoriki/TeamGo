@@ -1,7 +1,7 @@
 using System;
 using TeamGo.Shared.Abstracts.DataProviding;
 
-namespace Test.Engine
+namespace TeamGo.Tests.Engine
 {
     internal class TestEntity : IDataEntity, ISoftDeleteable
     {

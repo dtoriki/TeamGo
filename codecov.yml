@@ -1,5 +1,5 @@
 ignore:
-  - "tests/Test.Engine/*.*"
+  - "tests/TeamGo.Tests.Engine/*.*"
 coverage:
   precision: 1
   round: down
